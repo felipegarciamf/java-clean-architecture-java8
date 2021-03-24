@@ -3,6 +3,8 @@ package br.com.alura.escola.academico.dominio.aluno;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.alura.escola.shared.dominio.CPF;
+
 
 // AGGREGATE ROOT
 public class Aluno {

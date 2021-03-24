@@ -1,16 +1,19 @@
-package br.com.alura.escola.academico;
+package br.com.alura.escola;
 
 import br.com.alura.escola.academico.aplicacao.aluno.matricular.MatricularAluno;
 import br.com.alura.escola.academico.aplicacao.aluno.matricular.MatricularAlunoDto;
-import br.com.alura.escola.academico.dominio.PublicadorDeEventos;
-import br.com.alura.escola.academico.dominio.aluno.CPF;
 import br.com.alura.escola.academico.dominio.aluno.LogDeAlunoMatriculado;
 import br.com.alura.escola.academico.dominio.aluno.interfaces.RepositorioDeAlunos;
 import br.com.alura.escola.academico.infra.aluno.RepositorioDeAlunosEmMemoria;
+import br.com.alura.escola.gameficacao.aplicacao.GeraSeloAlunoNovato;
+import br.com.alura.escola.gameficacao.infra.selo.RepositorioDeSelosEmMemoria;
+import br.com.alura.escola.shared.dominio.CPF;
+import br.com.alura.escola.shared.dominio.evento.PublicadorDeEventos;
 
 public class MatricularAlunoViaLinhaDeComando {
 	
 	public static void main(String[] args) {
+		
 		
 		RepositorioDeAlunos repositorioDeAlunosEmMemoria = new RepositorioDeAlunosEmMemoria();
 		String nome = "Fulano da silva";
@@ -19,6 +22,7 @@ public class MatricularAlunoViaLinhaDeComando {
 	
 		PublicadorDeEventos publicadorDeEventos = new PublicadorDeEventos();
 		publicadorDeEventos.adicionar(new LogDeAlunoMatriculado());
+		publicadorDeEventos.adicionar(new GeraSeloAlunoNovato(new RepositorioDeSelosEmMemoria()));
 		
 		MatricularAluno matricularAluno = new MatricularAluno(repositorioDeAlunosEmMemoria, publicadorDeEventos);
 		
